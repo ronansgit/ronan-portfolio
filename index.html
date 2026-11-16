@@ -1005,7 +1005,6 @@ h1, h2, h3 { text-wrap: balance; }
 .channel-logo { width: 42px; height: 42px; flex: none; border-radius: 9px; display: block; }
 
 .channels-empty { font-size: var(--fs-sm); color: var(--on-night-2); }
-.contact-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .meta-list { display: flex; flex-direction: column; gap: 0.35rem; font-size: var(--fs-sm); color: var(--on-night-2); }
 .meta-list span { display: inline-flex; align-items: center; gap: 0.55rem; }
 .meta-list i { width: 7px; height: 7px; border-radius: 50%; background: #6fd69a; box-shadow: 0 0 0 3px rgba(111, 214, 154, 0.16); }
@@ -1197,7 +1196,7 @@ h1, h2, h3 { text-wrap: balance; }
     background: #fff !important; border-color: #d7d7d2 !important;
   }
   .site-header, .mobile-menu, .progress, .theme-toggle, .filters, .to-top, .footer-actions,
-  .hero-aside, .cover, .project-open, .link-btn, .contact-actions, .case-icon { display: none !important; }
+  .hero-aside, .cover, .project-open, .link-btn, .case-icon { display: none !important; }
   .js [data-reveal] { opacity: 1 !important; transform: none !important; }
   .case-panel, .case-sum { grid-template-rows: 1fr !important; visibility: visible !important; }
   .hero { padding-top: 2rem; }
@@ -3010,35 +3009,6 @@ h1, h2, h3 { text-wrap: balance; }
       });
     }
 
-    /* Copiar o e-mail evita que o visitante dependa de um cliente de e-mail configurado. */
-    var mail = String(CONFIG.email || "").trim();
-    var grid = $(".contact-grid");
-    if (mail && grid && !$(".contact-actions", grid)) {
-      var row = document.createElement("div");
-      row.className = "contact-actions";
-      row.innerHTML = '<button class="btn btn-sm btn-outline-light" type="button" data-copy-mail>Copiar e-mail</button>';
-      grid.insertBefore(row, $(".meta-list", grid));
-      $("[data-copy-mail]", row).addEventListener("click", function (ev) {
-        copyText(mail, ev.currentTarget, "E-mail copiado");
-      });
-    }
-  }
-
-  function copyText(text, btn, done) {
-    var original = btn.textContent;
-    function ok() {
-      btn.textContent = done || "Copiado";
-      window.setTimeout(function () { btn.textContent = original; }, 1800);
-    }
-    function fallback() {
-      var t = document.createElement("textarea");
-      t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
-      document.body.appendChild(t); t.select();
-      try { document.execCommand("copy"); ok(); } catch (e) { btn.textContent = "Copie manualmente"; }
-      t.remove();
-    }
-    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, fallback);
-    else fallback();
   }
 
   /* =====================================================================
